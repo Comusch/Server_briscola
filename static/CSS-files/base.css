@@ -1,0 +1,41 @@
+
+.cost-color-front > a{
+    color: #9d0523;
+}
+
+.cost-color-front > div{
+    color: #9d0523;
+}
+
+.cost-color-front{
+    color: #9d0523;
+}
+
+.cost-back-color{
+    background-color: #9d0523;
+    color: black;
+}
+
+.button-div-before{
+    align: center;
+}
+
+.fixed-button{
+    position: fixed;
+    align: right;
+    bottom: 20px;
+    background-color: #9d0523;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    right: 20px;
+}
+
+.navbar{
+    position: fixed !important;
+    background-color: rgb(0, 13, 100);
+    width: 100%;
+}
+
