@@ -1,8 +1,17 @@
 {% extends "base.html" %}
-{% block title %}
-create Table
-{% endblock %}
+{% block title %}   create Table{% endblock %}
 {% block content %}
-    <h3>create Table</h3>
-    <p>Here you can create your own new table, for your friends</p>
+    <form method = "POST">
+        <h3 align="center">create Table</h3>
+        <p>Here you can create your own new table, for your friends</p>
+        <div class="form-group">
+            <label for="name-table">What is the name of the table</label>
+            <input type="text" class="form-control" id="name-table" name="name-table" placeholder="Name of the table">
+            <label for="discription">Discription</label>
+            <input type="text" class="form-control" id="discription" name="discription" placeholder="Give the table a discription">
+            <br />
+            <button type="submit" class="btn btn-primary">Create table</button>
+
+        </div>
+    </form>
 {% endblock %}

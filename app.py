@@ -7,7 +7,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
+
 tables = []
+infinite_counter = 1
+
+def infinite_couterchange(new_value):
+    infinite_counter = new_value
 
 def create_app():
     #create the app and the database

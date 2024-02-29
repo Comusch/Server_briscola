@@ -5,4 +5,16 @@ join table
 {% block content %}
     <h3>join table</h3>
     <p>Here can you join a table, which you want</p>
+    <form action="/join_table" method="post">
+        <label for="table">Table:</label>
+        <input type="text" id="table" name="table" required>
+        <button type="submit" value="Join" class="btn btn-primary">join</button>
+    </form>
+    {% for table in tables %}
+        <div class="table_container">
+            <a href="/tables/{{ table.id }}">{{ table.name }}</a>
+            <p>Person on it: {{ table.length }}<p>
+            <p>Description: {{ table.description }}</p>
+        </div>
+    {% endfor %}
 {% endblock %}
