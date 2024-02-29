@@ -7,8 +7,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
+tables = []
 
 def create_app():
+    #create the app and the database
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "Winnetou"
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
@@ -30,6 +32,11 @@ def create_app():
         return User.query.get(int(user_id))
 
     create_database(app)
+
+    # the website is now running
+    # in the following the tables and the game mode will be created
+    # TODO: create the tables and the game mode
+
 
     return app
 
