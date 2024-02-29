@@ -1,14 +1,15 @@
 
 .cost-color-front > a{
-    color: #9d0523;
+    color: #ffffff;
 }
 
 .cost-color-front > div{
-    color: #9d0523;
+    color: #ffffff;
 }
 
 .cost-color-front{
-    color: #9d0523;
+    color: #ffffff;
+    font-weight: 500;
 }
 
 .cost-back-color{
@@ -34,8 +35,17 @@
 }
 
 .navbar{
-    position: fixed !important;
     background-color: rgb(0, 13, 100);
     width: 100%;
 }
 
+
+.navbar-nav-item{
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #ffffff;
+    font-weight: 500;
+
+}

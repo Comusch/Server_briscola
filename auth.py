@@ -7,13 +7,16 @@ import os
 
 auth = Blueprint('auth', __name__)
 
+@auth.route('/', methods=['GET', 'POST'])
+def welcomepage():
+    return render_template("welcomepage.html", user=current_user)
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     #data gets the data from the form, form is coming from the login.html post method
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
-
         user = User.query.filter_by(email=email).first()
         if user:
             if check_password_hash(user.password, password):
@@ -53,12 +56,12 @@ def signup():
         elif len(password1) < 4:
             flash("Password is too short.", category='error')
         else:
-            new_user = User(email=email, firstName=nickName, password=generate_password_hash(password1, method='sha256'))
+            new_user = User(email=email, nickName=nickName, password=generate_password_hash(password1, method='pbkdf2:sha1'))
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
             flash("Account created!", category='success')
-            return redirect(url_for('auth.addProfile'))
+            return redirect(url_for('views.home'))
 
 
     return render_template("signup.html", user=current_user)

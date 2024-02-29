@@ -1,11 +1,27 @@
 {% extends "base.html" %} {% block  title%}Home{% endblock %}
 {% block styles %}
-    <link rel="stylesheet" href="../static/CSS-files/style_home.css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS-files/home.css') }}">
 {% endblock %}
 
 {% block content %}
-    <h1>Home</h1>
-    <p>Welcome to the home page</p>
-    <p>On this website you can play briscola online</p>
+    <div class="Welcome">
+        <h1>Welcome to Briscola arena</h1>
+        <p>Now you can create a new briscola tabel or join one, which you see</p>
+    </div>
+    <div class="container2">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/createTabel" class="btn btn-primary btn-lg">
+                    <img src="{{ url_for('static', filename='Icons/plus(1).png') }}" alt="plus" class="plus" width="30" height="30">
+                    Create a new table
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="/joinTabel" class="btn btn-primary btn-lg">
+                    <img src="{{ url_for('static', filename='Icons/share.png') }}" alt="join" class="join" width="30" height="30">
+                    Join a table
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
