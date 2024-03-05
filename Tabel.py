@@ -13,8 +13,9 @@ class Table:
         self.link = link
         self.description = description
         #the players list contains the first player and the other players
-        #player is an instance of the S_Player class
+        #player is an instance of the place from the database
         self.players = [firstplayer]
+        self.play_mode = 5
         self.length = 1
         self.game = None
 
@@ -29,6 +30,9 @@ class Table:
     def start_game(self):
         #TODO: create the game
         pass
+
+    def set_playmode(self, new_play_mode):
+        self.play_mode = new_play_mode
 
 
 class S_Player:

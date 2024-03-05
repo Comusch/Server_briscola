@@ -1,20 +1,51 @@
 {% extends "base.html" %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS-files/joinTable.css') }}">
+{% endblock %}
 {% block title %}
 join table
 {% endblock %}
 {% block content %}
-    <h3>join table</h3>
-    <p>Here can you join a table, which you want</p>
-    <form action="/join_table" method="post">
-        <label for="table">Table:</label>
-        <input type="text" id="table" name="table" required>
-        <button type="submit" value="Join" class="btn btn-primary">join</button>
-    </form>
-    {% for table in tables %}
-        <div class="table_container">
-            <a href="/tables/{{ table.id }}">{{ table.name }}</a>
-            <p>Person on it: {{ table.length }}<p>
-            <p>Description: {{ table.description }}</p>
-        </div>
-    {% endfor %}
+    <h3 align="center">Join a table</h3>
+    <div class="container-ontop">
+        <p>Here can you join a table, which you want</p>
+        <form action="/join_table" method="post">
+            <label for="table">Table:</label>
+            <input type="text" id="table" name="table" placeholder="Search table name">
+            <button type="submit" class="btn btn-primary" width="20" height="20">
+                <img src="{{ url_for('static', filename='Icons/search.png') }}" alt="join" class="icon" width="20" height="20">
+            </button>
+        </form>
+    </div>
+    <p>current tables on the website</p>
+    <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Table name</th>
+                            <th scope="col">Players</th>
+                            <th scope="col">Join</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for table in tables %}
+                            <tr>
+                                <td>{{ table.name }}</td>
+                                <td>
+                                    {% for player in table.players %}
+                                        {{ player.name }}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <a href="/table/{{ table.id }}" class="btn btn-primary btn-sm">
+                                        <img src="{{ url_for('static', filename='Icons/share.png') }}" alt="join" class="join" width="20" height="20">
+                                        Join
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
 {% endblock %}

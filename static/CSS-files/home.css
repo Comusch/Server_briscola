@@ -13,3 +13,7 @@
     margin-bottom: 100px;
 
 }
+
+.row > div{
+    margin: 10px;
+}

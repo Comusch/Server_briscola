@@ -9,7 +9,7 @@ db = SQLAlchemy()
 DB_NAME = "database.db"
 
 tables = []
-infinite_counter = 1
+
 
 def infinite_couterchange(new_value):
     infinite_counter = new_value
@@ -42,6 +42,8 @@ def create_app():
     # in the following the tables and the game mode will be created
     # TODO: create the tables and the game mode
 
+    # just default values to test the programm
+
 
     return app
 
@@ -55,7 +57,10 @@ def create_database(app):
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(host='192.168.2.33', use_reloader=False)
+    import Tabel
+    tables.append(Tabel.Table(0, "firsttestTabel", f"/table/0",
+                              "First test table to play briscola"))
+    app.run(host='192.168.2.169', use_reloader=False)
 
 
 

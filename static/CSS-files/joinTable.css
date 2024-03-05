@@ -1,0 +1,12 @@
+.container-ontop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-ontop form {
+    margin-left: auto;
+    justify-items: center;
+}
+
