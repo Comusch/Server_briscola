@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_user, login_required, logout_user, current_user
-
+import os
 import app
 from app import tables
 from Tabel import *
@@ -12,6 +12,24 @@ views = Blueprint('views', __name__)
 @login_required
 def home():
     return render_template("Home.html",  user=current_user, tables=tables)
+
+@views.route('/changeProfil', methods=['GET', 'POST'])
+@login_required
+def changeProfil():
+    #TODO: Add the functionality to change the profil
+    if request.method == 'POST':
+        if "image" in request.files:
+            print("image")
+            image = request.files["image"]
+            print("lol")
+            image_filename = f"{current_user.id}_profil.png"
+            image_path = os.path.join("static", "Profil_images", image_filename)
+            print(image_path)
+            image.save(image_path)
+            current_user.img_profile = image_filename
+            print(current_user.img_profile)
+            flash("Image saved!", category='success')
+    return render_template("addProfile.html", user=current_user)
 
 @views.route('/create-table', methods=['GET', 'POST'])
 @login_required
@@ -37,6 +55,9 @@ def join_table():
 @login_required
 def table(table_id):
     return render_template("table.html", user=current_user, table= tables[table_id-1])
+
+
+
 
 
 
