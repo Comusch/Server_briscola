@@ -16,7 +16,6 @@ def home():
 @views.route('/changeProfil', methods=['GET', 'POST'])
 @login_required
 def changeProfil():
-    #TODO: Add the functionality to change the profil
     if request.method == 'POST':
         if "image" in request.files:
             print("image")
@@ -47,13 +46,13 @@ def create_table():
 @views.route('/join-table', methods=['GET', 'POST'])
 @login_required
 def join_table():
-    #TODO: Add the player to the table
     print(tables)
     return render_template("joinTable.html", user=current_user, tables=tables)
 
 @views.route('/table/<int:table_id>', methods=['GET', 'POST'])
 @login_required
 def table(table_id):
+    #TODO: Add the user to the table
     return render_template("table.html", user=current_user, table= tables[table_id-1])
 
 
