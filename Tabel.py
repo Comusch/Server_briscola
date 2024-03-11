@@ -23,6 +23,12 @@ class Table:
         self.players.append(player)
         self.length +=1
 
+    def check_is_player(self, player):
+        for p in self.players:
+            if p.id == player.id:
+                return True
+        return False
+
     def remove_player(self, player):
         self.players.remove(player)
         self.length -=1
@@ -33,13 +39,3 @@ class Table:
 
     def set_playmode(self, new_play_mode):
         self.play_mode = new_play_mode
-
-
-class S_Player:
-
-    def __init__(self, id, nickname):
-        if db.session.query(User).filter_by(id=id).first() and db.session.query(User).filter_by(nickName=nickname).first():
-            self.id = id
-            self.nickname = nickname
-        else:
-            raise ValueError("The user don't exist in the database.")

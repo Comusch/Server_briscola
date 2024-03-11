@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block styles %}
+    <link link rel="stylesheet" href="{{ url_for("static", filename="CSS-files/load_side_style.css")}}"/>
+    <script>
+          var table_id = {{ table.id }};
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="{{ url_for("static", filename="JS-files/loading_side.js") }}"></script>
+{% endblock %}
+{% block title %}Load Side{% endblock %}
+{% block content %}
+    <div class="container2">
+    <div id="container1">
+        <div class="game-info">
+            <p>Name: {{ table.name }}</p>
+            <p>Description: {{ table.description }}</p>
+            <p class="player_number">Players: {{ table.players|length }}/5</p>
+        </div>
+        <div class="players">
+            <div class="playerss">
+
+            </div>
+            <div class="player">
+                <div class="loader"></div>
+                <span>Waiting for other Players...</span>
+            </div>
+        </div>
+        <div class="game-area">
+            <div class="placeholder"></div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

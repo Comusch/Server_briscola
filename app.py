@@ -40,7 +40,6 @@ def create_app():
 
     # the website is now running
     # in the following the tables and the game mode will be created
-    # TODO: create the tables and the game mode
 
     # just default values to test the programm
 
@@ -60,7 +59,7 @@ if __name__ == '__main__':
     import Tabel
     tables.append(Tabel.Table(0, "firsttestTabel", f"/table/0",
                               "First test table to play briscola"))
-    app.run(host='192.168.2.173', use_reloader=False)
+    app.run(host='192.168.2.179', use_reloader=False)
 
 
 

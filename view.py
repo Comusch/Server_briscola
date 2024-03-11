@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 import os
+from models import User
 import app
 from app import tables
 from Tabel import *
+from app import db
 
 views = Blueprint('views', __name__)
 
@@ -36,10 +38,10 @@ def create_table():
     if request.method == 'POST':
         table_name = request.form.get('name-table')
         table_description = request.form.get('discription')
-        first_player = current_user
-        tables.append(Table(len(tables), table_name, f"/table/{len(tables)}", table_description, current_user))
+        first_player = User.query.filter(User.id == current_user.id).first()
+        tables.append(Table(len(tables), table_name, f"/table/{len(tables)}", table_description, firstplayer=first_player))
         print(f"Table name: {table_name}, Table description: {table_description}")
-        return redirect(url_for('views.table', table_id=len(tables)))
+        return redirect(url_for('views.table', table_id=(len(tables)-1)))
 
     return render_template("createTabel.html", user=current_user)
 
@@ -52,8 +54,31 @@ def join_table():
 @views.route('/table/<int:table_id>', methods=['GET', 'POST'])
 @login_required
 def table(table_id):
-    #TODO: Add the user to the table
-    return render_template("table.html", user=current_user, table= tables[table_id-1])
+    print(tables[table_id-1].check_is_player(current_user))
+    #show which player is in table
+    print("Player in table")
+    for p in tables[table_id-1].players:
+        print(p.nickName)
+    if tables[table_id-1].check_is_player(current_user) == False:
+        new_player = User.query.filter(User.id == current_user.id).first()
+        tables[table_id-1].add_player(new_player)
+        print("Player added!")
+        flash("You are now a player of the table!", category='success')
+
+    if tables[table_id-1].length != tables[table_id-1].play_mode:
+        return render_template("load_side.html", user=current_user, table= tables[table_id-1])
+    else:
+        flash("The table is full!", category='success')
+        return redirect(url_for('views.join_table'))
+
+@views.route('/table/<int:table_id>/player_data', methods=['GET', 'POST'])
+@login_required
+def player_data(table_id):
+    player_data = []
+    player_data.append((tables[table_id-1].length, tables[table_id-1].play_mode))
+    for p in tables[table_id-1].players:
+        player_data.append((p.nickName, p.img_profile))
+    return jsonify(player_data)
 
 
 
