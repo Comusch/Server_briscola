@@ -80,6 +80,12 @@ def player_data(table_id):
         player_data.append((p.nickName, p.img_profile))
     return jsonify(player_data)
 
+@views.route('/table/<int:table_id>/game', methods=['GET', 'POST'])
+@login_required
+def game(table_id):
+    return render_template("game.html", user=current_user, table=tables[table_id-1])
+
+
 
 
 

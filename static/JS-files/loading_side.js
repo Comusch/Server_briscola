@@ -1,3 +1,6 @@
+
+//TODO:description of the game is which game and which mode it is
+
 jQuery(document).ready(function($) {
     // Sample JSON data (replace this with your actual data)
     var playersData = [
@@ -8,21 +11,21 @@ jQuery(document).ready(function($) {
 
     var url = '/table/'+table_id+'/player_data'
 
-    // Function to replace the player HTML content
-    function updatePlayersUI(players) {
-        var player_numberElement = document.getElementById('.player_number');
-        player_numberElement.textContent = players[0][0]
+    // Function to replace the player HTML content form the data received
+    function updatePlayersUI(data) {
+        var player_numberElement = document.getElementById('player_number');
+        player_numberElement.textContent = data[0][0]+"/"+data[0][1];
 
         var playersContainer = $('.players .playerss'); // Selecting the nested element
         playersContainer.empty(); // Clear existing player data
 
-        players.slice(1).forEach(function(player) {
+        for (var i = 1; i < data.length; i++) {
             var playerHTML = '<div class="player">' +
-                                 '<img src="../static/Profil_images/' + player[1]+ '" alt="' + player[0] + '">' +
-                                 '<span>' + player[0] + '</span>' +
-                             '</div>';
+                '<img src="../static/Profil_images/' + data[i][1] + '" alt="' + data[i][0] + '">' +
+                '<span>' + data[i][0] + '</span>' +
+                '</div>';
             playersContainer.append(playerHTML);
-        });
+        }
 
     }
 
@@ -32,8 +35,11 @@ jQuery(document).ready(function($) {
             type: 'GET',
             success: function(response) {
                 //TODO: Fix the response data
-                var tableLength = data[0][0];
-                var playMode = data[0][1];
+                var tableLength = response[0][0];
+                if (tableLength == 5){
+                    window.location.href = '/table/'+table_id+'/game';
+                }
+                var playMode = response[0][1];
                 console.log("Table Length:", tableLength);
                 console.log("Play Mode:", playMode);
                 updatePlayersUI(response); // Update UI with received data
