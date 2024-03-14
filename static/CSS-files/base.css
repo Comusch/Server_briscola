@@ -13,7 +13,7 @@
 }
 
 .cost-back-color{
-    background-color: rgb(0, 13, 100);
+    background-color: rgb(96, 33, 33);
     color: black;
 }
 
@@ -25,7 +25,7 @@
     position: fixed;
     align: right;
     bottom: 20px;
-    background-color: rgb(0, 13, 100);
+    background-color: rgb(96, 33, 33);
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -35,7 +35,7 @@
 }
 
 .navbar{
-    background-color: rgb(0, 13, 100);
+    background-color: rgb(96, 33, 33);
     width: 100%;
 }
 

@@ -1,12 +1,14 @@
+/* Background of the screen */
 .container1 {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #f0f0f0;
+    /* set all elements in the Center */
+    text-align: center;
 }
 
 #container2 {
@@ -17,22 +19,71 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 480px;
+    height: 100vh;
 }
 
+/* top of the screen */
+.StitchLabel {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    background: url('../static/UI-Game/bord_1.png') center/cover no-repeat;
+    background-size: cover; /* Ensures the background image covers the entire element */
+}
+
+.controllers {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.controllers > button {
+    background-color: rgba(0, 123, 255, 0);
+}
+
+/*Game area*/
 .game-area {
-    display: block; /* Zeige die Spielfläche */
-    width: 300px;
-    height: 200px;
-    background-color: #8B4513; /* Braun */
+    position: relative; /* Set the position to relative */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    width: 400px;
+    height: 450px;
+    background-color: rgba(139, 69, 19, 0); /* Brown */
     margin-bottom: 20px;
     border-radius: 10px;
 }
 
-.placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #8B4513; /* Braun */
+.game-bord {
+    position: absolute; /* Set the position to absolute */
 }
+
+.game-field{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Cards Display on the game-area */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    width: 100px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
+    margin: 5px;
+}
+
+/* Players Display */
 
 .players {
     display: flex;
@@ -45,42 +96,85 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 10px;
+    margin: 0 5px;
+    color: black;
 }
 
 .player img {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border: 3px solid transparent;
 }
 
 .player img:hover {
-    border-color: #00ff00; /* Grün */
+    border-color: #00ff00; /* Green */
 }
 
+/* Buttons for the cards */
+
 .buttons {
-    display: block; /* Zeige die Buttons */
+    display: block; /* Show the Buttons */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 300px;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 5px;
 }
 
 button {
-    padding: 10px 20px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+    background-color: rgba(0, 123, 255, 0);
+    color: rgba(255, 255, 255, 0);
     font-size: 16px;
+}
+
+.card_button > img {
+    width: 100px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
 }
 
 .score {
     font-size: 20px;
     font-weight: bold;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+    #container2 {
+        width: 100%; /* Make container2 full width on mobile */
+    }
+
+    .controllers{
+        font-size: 14px;
+    }
+
+    .game-area {
+        height: 200px; /* Adjusted for mobile */
+    }
+
+    .game-field {
+        font-size: 14px; /* Adjusted for mobile */
+    }
+
+    .card {
+        width: 50px; /* Adjusted for mobile */
+    }
+
+    .player img {
+        width: 60px; /* Adjusted for mobile */
+        height: 60px; /* Adjusted for mobile */
+    }
+
+    button {
+        font-size: 14px; /* Adjusted for mobile */
+    }
+
+    .card_button > img {
+    width: 50px;
+}
 }
