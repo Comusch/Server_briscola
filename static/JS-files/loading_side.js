@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
             success: function(response) {
                 //TODO: Fix the response data
                 var tableLength = response[0][0];
-                if (tableLength == 5){
+                if (tableLength == response[0][1] && response[0][1] != 0){
                     window.location.href = '/table/'+table_id+'/game';
                 }
                 var playMode = response[0][1];

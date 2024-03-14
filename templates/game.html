@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS-files/game.css') }}">
+    <link link rel="stylesheet" href="{{ url_for("static", filename="CSS-files/game.css")}}"/>
+    <script>
+          var table_id = {{ table.id }};
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="{{ url_for("static", filename="JS-files/game.js") }}"></script>
+{% endblock %}
+{% block content %}
+    <div id="container1">
+    <div id="container2">
+        <div class="players">
+            <div class="player">
+                <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 1">
+                <span>Player 1</span>
+            </div>
+            <div class="player">
+                <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 2">
+                <span>Player 2</span>
+            </div>
+            <div class="player">
+                <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 3">
+                <span>Player 3</span>
+            </div>
+            <div class="player">
+                <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 4">
+                <span>Player 4</span>
+            </div>
+        </div>
+        <div class="game-area">
+            <div class="placeholder"></div>
+        </div>
+        <div class="buttons">
+            <button>Card 1</button>
+            <button>Card 2</button>
+            <button>Card 3</button>
+            <button>Card 4</button>
+            <button>Card 5</button>
+            <button>Card 6</button>
+            <button>Card 7</button>
+            <button>Card 8</button>
+        </div>
+        <div class="score">
+            Score: <span id="score">0</span>
+        </div>
+    </div>
+    </div>
+{% endblock %}
