@@ -3,18 +3,20 @@ import Player as ply
 
 class Game:
 
-    def __init__(self, numb_player):
-        #create deck
+    def __init__(self, numb_player, player_ids):
+        # create deck
         self.deck = cd.Deck()
         self.deck.shuffle()
-        #trumph default
+        # trumph default
         self.trumpf = 99
-        #create (numb_player) player
+        # create (numb_player) player
         self.numb_player = numb_player
         self.players = []
+
         for i in range(0, self.numb_player):
-            self.players.append(ply.Player(i))
-        #give the players diffrend hands
+            self.players.append(ply.Player(player_ids[i]))
+
+        # give the players diffrend hands
         if self.numb_player == 5:
             for i in range(0, 8):
                 for i in range(0, self.numb_player):
@@ -22,54 +24,90 @@ class Game:
                     self.deck.cards.remove(self.deck.cards[0])
         self.stack = []
         self.current_player_nr = 0
-        #varibles for the bet, which player plays
+        # varibles for the bet, which player plays
         self.select_player = None
         self.lowest_bet = 999
         self.agree_number = 0
-        #Gamemodi
+        # Gamemodi
         self.player_search = True
         self.trumpf_select = False
         self.play_mode = False
 
+        #groups in the game
+        self.caller_group = []
+        self.defender_group = []
 
-    def Gamestart(self):
+
+    def Gamestart(self, begin_numb_player):
         #initiate a new game
         for player in self.players:
             player.reset()
         self.stack = []
+        #create deck
         self.deck = cd.Deck()
+        self.deck.shuffle()
+
         if self.numb_player == 5:
             for i in range(0, 8):
                 print(i)
                 self.round_get_one_card()
-        #set the player active
+        #set the player active#
+        self.current_player_nr = begin_numb_player
         self.players[self.current_player_nr].action = True
         for player in self.players:
             player.would_play = True
 
+        # Gamemodi
+        self.player_search = True
+        self.trumpf_select = False
+        self.play_mode = False
+
+        self.agree_number = 0
+        self.lowest_bet = 99
+
     #player_bet =? 20 --> player skips
     def add_Bet(self, player, player_bet):
         if player.action and self.player_search and player.would_play:
-            if player_bet == 20:
-                player = self.player_set_action(player)
+            if player_bet >= 20:
                 player.would_play = False
-                self.agree_number +=1
+                self.agree_number += 1
+                print("Agree!")
             elif player_bet < self.lowest_bet:
                 self.lowest_bet = player_bet
                 self.select_player = player
-                player = self.player_self_action(player)
+                print(f"Player with the id {player.id} would play")
 
         if self.agree_number == 4:
             self.player_search = False
             self.trumpf_select = True
+            print("next step in the game is possible")
+
+        print(f"Now {self.agree_number} agreed for it, active is {self.players[self.current_player_nr].id}")
+        player = self.player_set_action(player)
         return player
 
     def Select_Trumpf(self, player, trumpf):
+        print(self.trumpf_select)
         if self.trumpf_select and player == self.select_player:
             self.set_trumpf(trumpf)
             self.play_mode = True
             self.trumpf_select = False
 
+        self.caller_group.append(player)
+        player.set_roll(1)
+        for p in self.players:
+            if p == player:
+                continue
+            for i in range(len(p.hand)):
+                if p.hand[i].value == self.lowest_bet and p.hand[i].color == trumpf:
+                    self.caller_group.append(p)
+                    p.set_roll(1)
+                    break
+                elif i == len(p.hand)-1:
+                    self.defender_group.append(p)
+                    p.set_roll(2)
+
+        return player
 
     #Method play Card
     def play_Card(self, hand_nr, player):
@@ -85,9 +123,8 @@ class Game:
             self.current_player_nr = 0
         else:
             self.current_player_nr += 1
-        self.players[self.current_player_nr].action = True
         player.action = False
-
+        self.players[self.current_player_nr].action = True
         return player
 
     #Method set trumpf
@@ -121,9 +158,33 @@ class Game:
             if self.players[i].id == current_playerid:
                 winner = self.players[i]
                 self.current_player_nr = i
-        winner.collection.append(self.stack)
+        winner.get_stack_in_collection(self.stack)
         self.clear_stack()
         self.players[self.current_player_nr].action = True
+
+    def End_of_Game(self):
+        for player in self.players:
+            player = self.getScore(player)
+        print("score bord:")
+        for player in self.players:
+            print(f"Player id: {player.id}, score: {player.score}")
+
+        return self.who_wins()
+
+
+    def who_wins(self):
+        winners = []
+        caller_score = 0
+        defender_score = 0
+        for player in self.caller_group:
+            caller_score += player.score
+        for player in self.defender_group:
+            defender_score += player.score
+        if caller_score > defender_score:
+            winners = self.caller_group
+        else:
+            winners = self.defender_group
+        return winners
 
     def getScore(self, player):
         for card in player.collection:

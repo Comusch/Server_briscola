@@ -74,16 +74,35 @@ def table(table_id):
 @views.route('/table/<int:table_id>/player_data', methods=['GET', 'POST'])
 @login_required
 def player_data(table_id):
+
+    #add ficktive players to test the game
+    #it should be removed later
+    if tables[table_id-1].length != tables[table_id-1].play_mode:
+        tables[table_id-1].add_player(User.query.filter(User.id == tables[table_id-1].length).first())
+    #end of the test
+
+    #start the game
+    if tables[table_id-1].length == tables[table_id-1].play_mode:
+        tables[table_id-1].start_game()
+        print("Game started!")
+
     player_data = []
     player_data.append((tables[table_id-1].length, tables[table_id-1].play_mode))
     for p in tables[table_id-1].players:
         player_data.append((p.nickName, p.img_profile))
+
     return jsonify(player_data)
 
 @views.route('/table/<int:table_id>/game', methods=['GET', 'POST'])
 @login_required
 def game(table_id):
-    return render_template("game.html", user=current_user, table=tables[table_id-1])
+    return render_template("game.html", user=current_user, table=tables[table_id-1], players=tables[table_id-1].getArrayOfPlayerWithp_id(current_user.id))
+
+@views.route('/table/<int:table_id>/game_data', methods=['GET', 'POST'])
+@login_required
+def game_data(table_id):
+    #TODO: Send the game data to the right player (webclient)
+    pass
 
 
 

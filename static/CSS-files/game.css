@@ -12,6 +12,7 @@
 }
 
 #container2 {
+    position: relative; /* Set the position to relative */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,6 +113,19 @@
     border-color: #00ff00; /* Green */
 }
 
+.call_player {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 85%;
+    text-align: center;
+    background-color: #8B4513;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+
+}
+
 /* Buttons for the cards */
 
 .buttons {
@@ -141,6 +155,65 @@ button {
 .score {
     font-size: 20px;
     font-weight: bold;
+}
+
+/* Overlay for the Will you play */
+.Will_you_play{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* Ensure the overlay appears on top of other elements inside container2 */
+    background-color: rgba(0, 0, 0, 0.73); /* Semi-transparent background */
+
+    /* Hide the overlay by default */
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+}
+
+.buttons_willyouplay {
+    display: block; /* Show the Buttons */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 5px;
+}
+.card_will_play > img {
+    width: 100px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
+}
+
+/* Overlay for the who wins */
+.who_wins{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* Ensure the overlay appears on top of other elements inside container2 */
+    background-color: rgba(0, 0, 0, 0.83); /* Semi-transparent background */
+
+    /* Hide the overlay by default */
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+}
+
+.Winning_UI{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 /* Media query for mobile devices */

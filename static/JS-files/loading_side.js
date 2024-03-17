@@ -53,5 +53,5 @@ jQuery(document).ready(function($) {
     fetchPlayerData(); // Fetch player data when the page loads
 
     // Example: Call updatePlayerData function every 10 seconds
-    setInterval(fetchPlayerData, 10000); // 10000 milliseconds = 10 seconds
+    setInterval(fetchPlayerData, 1000); // 10000 milliseconds = 1 seconds
 });

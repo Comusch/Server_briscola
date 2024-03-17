@@ -30,12 +30,18 @@
             <div class="game-field">
                 <div class="firstAndSecoundPlayer">
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 1">
-                        <span>Player 1</span>
+                        <img src="{{ url_for('static', filename="Profil_images/"+players[0].img_profile)}}" alt="Player 1">
+                        <p class="call_player" id="call_player_0">
+                            I would play with a 12.
+                        </p>
+                        <span>{{ players[0].nickName }}</span>
                     </div>
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 2">
-                        <span>Player 2</span>
+                        <img src="{{ url_for('static', filename="Profil_images/"+players[1].img_profile)}}" alt="Player 2">
+                        <p class="call_player" id="call_player_1">
+                            I would play with a 12.
+                        </p>
+                        <span>{{ players[1].nickName }}</span>
                     </div>
                 </div>
                 <div class="game-area">
@@ -60,12 +66,18 @@
                 </div>
                 <div class="therdAndFourthPlayer">
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 3">
-                        <span>Player 3</span>
+                        <img src="{{ url_for('static', filename="Profil_images/"+players[3].img_profile)}}" alt="Player 3">
+                        <p class="call_player" id="call_player_3">
+                            I would play with a 12.
+                        </p>
+                        <span>{{ players[3].nickName }}</span>
                     </div>
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/default.png")}}" alt="Player 4">
-                        <span>Player 4</span>
+                        <img src="{{ url_for('static', filename="Profil_images/"+players[4].img_profile)}}" alt="Player 4">
+                        <p class="call_player" id="call_player_4">
+                            I would play with a 12.
+                        </p>
+                        <span>{{ players[4].nickName }}</span>
                     </div>
                 </div>
             </div>
@@ -98,6 +110,60 @@
             <div class="score">
                 Score: <span id="score">0</span>
             </div>
+        </div>
+
+        <div class="Will_you_play" id="Will_you_play">
+            <h4>Which high of the card would you like to play?</h4>
+            <div class="buttons_willyouplay">
+                <button id="card1" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card09.png") }}" height="100%" width="100%" alt="Card1">
+                </button>
+                <button id="card2" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card08.png") }}" height="100%" width="100%" alt="Card2">
+                </button>
+                <button id="card3" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card07.png") }}" height="100%" width="100%" alt="Card3">
+                </button>
+                <button id="card4" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card06.png") }}" height="100%" width="100%" alt="Card4">
+                </button>
+                <button id="card5" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card05.png") }}" height="100%" width="100%" alt="Card5">
+                </button>
+                <button id="Card6" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card6">
+                </button>
+                <button id="Card7" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card03.png") }}" height="100%" width="100%" alt="Card7">
+                </button>
+                <button id="Card8" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card02.png") }}" height="100%" width="100%" alt="Card8">
+                </button>
+                <button id="Card8" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card01.png") }}" height="100%" width="100%" alt="Card8">
+                </button>
+                <button id="Card8" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card00.png") }}" height="100%" width="100%" alt="Card8">
+                </button>
+            </div>
+            <p>When you just approve, you don't play or bet any longer!</p>
+            <button id="ApproveButton" class="ApproveButton">
+                <img src="{{ url_for("static", filename="UI-Game/approve.png") }}" width="60px" height="100%">
+            </button>
+        </div>
+
+        <div class="who_wins" id ="who_wins">
+            <h3 class="win_status_label" id="win_status_label" >You win the game</h3>
+            <p>You win with 62 points of 120 points</p>
+            <div class="Winning_UI">
+                 <button id="newGame" class="newGame">
+                    <img src="{{ url_for("static", filename="Bilddateien/newGame.png") }}" width="80px" height="100%">
+                 </button>
+                 <button id="backToMenu" class="backToMenu">
+                     <img src="{{ url_for("static", filename="Bilddateien/home.png") }}" width="80px" height="100%">
+                 </button>
+            </div>
+            <p class="newgame_lable" id="newgame_lable">You need to wait for the other players to start a new Game</p>
         </div>
 
     </div>
