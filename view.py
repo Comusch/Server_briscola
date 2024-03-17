@@ -101,8 +101,22 @@ def game(table_id):
 @views.route('/table/<int:table_id>/game_data', methods=['GET', 'POST'])
 @login_required
 def game_data(table_id):
-    #TODO: Send the game data to the right player (webclient)
-    pass
+    data =[]
+    data = tables[table_id-1].get_game_state(current_user.id)
+
+    for p in tables[table_id-1].players:
+        print(p.id)
+
+    for p in tables[table_id-1].game.players:
+        print(p.id)
+
+    #Test if the data is correct
+    data = tables[table_id-1].get_game_state(6)
+
+    print(data)
+    return jsonify(data)
+
+#TODO: add function to bet, select trumpf and play card form the clinet side
 
 
 

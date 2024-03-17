@@ -28,10 +28,15 @@ class Game:
         self.select_player = None
         self.lowest_bet = 999
         self.agree_number = 0
+        self.number_of_stacks = 0
+
+        self.last_stack = []
+
         # Gamemodi
         self.player_search = True
         self.trumpf_select = False
         self.play_mode = False
+        self.end_of_game_screen = False
 
         #groups in the game
         self.caller_group = []
@@ -56,6 +61,8 @@ class Game:
         self.players[self.current_player_nr].action = True
         for player in self.players:
             player.would_play = True
+        self.number_of_stacks = 0
+        self.last_stack = []
 
         # Gamemodi
         self.player_search = True
@@ -159,6 +166,8 @@ class Game:
                 winner = self.players[i]
                 self.current_player_nr = i
         winner.get_stack_in_collection(self.stack)
+        self.number_of_stacks += 1
+        self.last_stack = self.stack
         self.clear_stack()
         self.players[self.current_player_nr].action = True
 
