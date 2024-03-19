@@ -54,19 +54,19 @@ def join_table():
 @views.route('/table/<int:table_id>', methods=['GET', 'POST'])
 @login_required
 def table(table_id):
-    print(tables[table_id-1].check_is_player(current_user))
+    print(tables[table_id].check_is_player(current_user))
     #show which player is in table
     print("Player in table")
-    for p in tables[table_id-1].players:
+    for p in tables[table_id].players:
         print(p.nickName)
-    if tables[table_id-1].check_is_player(current_user) == False:
+    if tables[table_id].check_is_player(current_user) == False:
         new_player = User.query.filter(User.id == current_user.id).first()
-        tables[table_id-1].add_player(new_player)
+        tables[table_id].add_player(new_player)
         print("Player added!")
         flash("You are now a player of the table!", category='success')
 
-    if tables[table_id-1].length != tables[table_id-1].play_mode:
-        return render_template("load_side.html", user=current_user, table= tables[table_id-1])
+    if tables[table_id].length != tables[table_id].play_mode:
+        return render_template("load_side.html", user=current_user, table= tables[table_id])
     else:
         flash("The table is full!", category='success')
         return redirect(url_for('views.join_table'))
@@ -77,18 +77,18 @@ def player_data(table_id):
 
     #add ficktive players to test the game
     #it should be removed later
-    if tables[table_id-1].length != tables[table_id-1].play_mode:
-        tables[table_id-1].add_player(User.query.filter(User.id == tables[table_id-1].length).first())
+    if tables[table_id].length != tables[table_id].play_mode:
+        tables[table_id].add_player(User.query.filter(User.id == tables[table_id].length).first())
     #end of the test
 
     #start the game
-    if tables[table_id-1].length == tables[table_id-1].play_mode:
-        tables[table_id-1].start_game()
+    if tables[table_id].length == tables[table_id].play_mode:
+        tables[table_id].start_game()
         print("Game started!")
 
     player_data = []
-    player_data.append((tables[table_id-1].length, tables[table_id-1].play_mode))
-    for p in tables[table_id-1].players:
+    player_data.append((tables[table_id].length, tables[table_id].play_mode))
+    for p in tables[table_id].players:
         player_data.append((p.nickName, p.img_profile))
 
     return jsonify(player_data)
@@ -96,24 +96,22 @@ def player_data(table_id):
 @views.route('/table/<int:table_id>/game', methods=['GET', 'POST'])
 @login_required
 def game(table_id):
-    return render_template("game.html", user=current_user, table=tables[table_id-1], players=tables[table_id-1].getArrayOfPlayerWithp_id(current_user.id))
+    return render_template("game.html", user=current_user, table=tables[table_id], players=tables[table_id].getArrayOfPlayerWithp_id(current_user.id))
 
 @views.route('/table/<int:table_id>/game_data', methods=['GET', 'POST'])
 @login_required
 def game_data(table_id):
     data =[]
-    data = tables[table_id-1].get_game_state(current_user.id)
+    if len(tables) > table_id:
+        data = tables[table_id].get_game_state(current_user.id)
 
-    for p in tables[table_id-1].players:
-        print(p.id)
+        #test if the card will shown on the bord
+        d2 = [(22, 1), (23, 2), (24, 3)]
+        data[3] = d2
 
-    for p in tables[table_id-1].game.players:
-        print(p.id)
-
-    #Test if the data is correct
-    data = tables[table_id-1].get_game_state(6)
-
-    print(data)
+        print(data)
+    else:
+        data = None
     return jsonify(data)
 
 #TODO: add function to bet, select trumpf and play card form the clinet side

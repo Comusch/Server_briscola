@@ -47,20 +47,20 @@
                 <div class="game-area">
                     <img class="game-bord" src="{{ url_for("static", filename="UI-Game/game-bord.png") }}" height="100%" width="100%" >
                     <div class="cards" id="cards">
-                        <div class="card" id="card1">
-                            <img src="{{ url_for("static", filename="Bilddateien/Card01.png") }}" height="100%" width="100%">
+                        <div class="card" id="bord_card0">
+                            <img src="{{ url_for("static", filename="Bilddateien/Card_placeholder.png") }}" height="100%" width="100%">
                         </div>
-                         <div class="card" id="card2">
+                         <div class="card" id="bord_card1">
+                            <img src="{{ url_for("static", filename="Bilddateien/Card_placeholder.png") }}" height="100%" width="100%">
+                        </div>
+                         <div class="card" id="bord_card2">
                             <img src="{{ url_for("static", filename="Bilddateien/Card02.png") }}" height="100%" width="100%">
                         </div>
-                         <div class="card" id="card2">
-                            <img src="{{ url_for("static", filename="Bilddateien/Card02.png") }}" height="100%" width="100%">
-                        </div>
-                         <div class="card" id="card3">
+                         <div class="card" id="bord_card3">
                             <img src="{{ url_for("static", filename="Bilddateien/Card03.png") }}" height="100%" width="100%">
                         </div>
-                         <div class="card" id="card4">
-                            <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%">
+                         <div class="card" id="bord_card4">
+                            <img src="{{ url_for("static", filename="Bilddateien/Card_placeholder.png") }}" height="100%" width="100%">
                         </div>
                     </div>
                 </div>
@@ -82,67 +82,64 @@
                 </div>
             </div>
             <div class="buttons">
-                <button id="card1" class="card_button">
+                <button id="card0" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card1">
                 </button>
-                <button id="card2" class="card_button">
+                <button id="card1" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card2">
                 </button>
-                <button id="card3" class="card_button">
+                <button id="card2" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card3">
                 </button>
-                <button id="card4" class="card_button">
+                <button id="card3" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card4">
                 </button>
-                <button id="card5" class="card_button">
+                <button id="card4" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card5">
                 </button>
-                <button id="Card6" class="card_button">
+                <button id="card5" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card6">
                 </button>
-                <button id="Card7" class="card_button">
+                <button id="card6" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card7">
                 </button>
-                <button id="Card8" class="card_button">
+                <button id="card7" class="card_button">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card8">
                 </button>
-            </div>
-            <div class="score">
-                Score: <span id="score">0</span>
             </div>
         </div>
 
         <div class="Will_you_play" id="Will_you_play">
             <h4>Which high of the card would you like to play?</h4>
             <div class="buttons_willyouplay">
-                <button id="card1" class="card_will_play">
+                <button id="will_play_card1" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card09.png") }}" height="100%" width="100%" alt="Card1">
                 </button>
-                <button id="card2" class="card_will_play">
+                <button id="will_play_card2" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card08.png") }}" height="100%" width="100%" alt="Card2">
                 </button>
-                <button id="card3" class="card_will_play">
+                <button id="will_play_card3" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card07.png") }}" height="100%" width="100%" alt="Card3">
                 </button>
-                <button id="card4" class="card_will_play">
+                <button id="will_play_card4" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card06.png") }}" height="100%" width="100%" alt="Card4">
                 </button>
-                <button id="card5" class="card_will_play">
+                <button id="will_play_card5" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card05.png") }}" height="100%" width="100%" alt="Card5">
                 </button>
-                <button id="Card6" class="card_will_play">
+                <button id="will_play_card6" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card04.png") }}" height="100%" width="100%" alt="Card6">
                 </button>
-                <button id="Card7" class="card_will_play">
+                <button id="will_play_card7" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card03.png") }}" height="100%" width="100%" alt="Card7">
                 </button>
-                <button id="Card8" class="card_will_play">
+                <button id="will_play_card8" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card02.png") }}" height="100%" width="100%" alt="Card8">
                 </button>
-                <button id="Card8" class="card_will_play">
+                <button id="will_play_card8" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card01.png") }}" height="100%" width="100%" alt="Card8">
                 </button>
-                <button id="Card8" class="card_will_play">
+                <button id="will_play_card8" class="card_will_play">
                     <img src="{{ url_for("static", filename="Bilddateien/Card00.png") }}" height="100%" width="100%" alt="Card8">
                 </button>
             </div>
@@ -150,6 +147,24 @@
             <button id="ApproveButton" class="ApproveButton">
                 <img src="{{ url_for("static", filename="UI-Game/approve.png") }}" width="60px" height="100%">
             </button>
+        </div>
+
+        <div class="with_which_color" id="with_which_color">
+            <h4>With which color would you like to play?</h4>
+            <div class="buttons_which_color_">
+                <button id="which_color_card1" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card09.png") }}" height="100%" width="100%" alt="Card1">
+                </button>
+                <button id="which_color_card2" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card19.png") }}" height="100%" width="100%" alt="Card2">
+                </button>
+                <button id="which_color_card3" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card29.png") }}" height="100%" width="100%" alt="Card3">
+                </button>
+                <button id="which_color_card4" class="card_will_play">
+                    <img src="{{ url_for("static", filename="Bilddateien/Card39.png") }}" height="100%" width="100%" alt="Card4">
+                </button>
+            </div>
         </div>
 
         <div class="who_wins" id ="who_wins">

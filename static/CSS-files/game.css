@@ -76,12 +76,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .card {
     width: 100px;
     flex-shrink: 0; /* Prevents cards from shrinking */
     margin: 5px;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 /* Players Display */
@@ -185,6 +187,40 @@ button {
     max-width: 400px;
     margin-bottom: 5px;
 }
+.card_will_play > img {
+    width: 100px;
+    flex-shrink: 0; /* Prevents cards from shrinking */
+}
+
+/* Overlay with which color would you like to play */
+.with_which_color{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999; /* Ensure the overlay appears on top of other elements inside container2 */
+    background-color: rgba(0, 0, 0, 0.73); /* Semi-transparent background */
+
+    /* Hide the overlay by default */
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+}
+
+.buttons_willyouplay{
+ /* Show the Buttons */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 5px;
+}
+
 .card_will_play > img {
     width: 100px;
     flex-shrink: 0; /* Prevents cards from shrinking */

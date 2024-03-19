@@ -106,11 +106,10 @@ class Table:
                     break
 
     #give the game state back
-    #the game states: 0 = bet, 1 = select trumpf, 2 = play card
+    #the game states: 0 = bet, 1 = select trumpf, 2 = play card and 3 = end of the game
     def get_game_state(self, player_id):
         data = []
         for i in range(len(self.game.players)):
-            print(self.game.players[i].id == player_id)
             if self.game.players[i].id == player_id:
                 #erste Zeile: game state: 0 = bet, 1 = select trumpf, 2 = play card, 3 = end of the game
                 if self.game.player_search:
@@ -127,7 +126,7 @@ class Table:
                 else:
                     data.append(2)
                 #zweite Zeile: is player action: 0 = false, 1 = true
-                if self.game.players[i].action:
+                if self.game.players[i].action or (self.game.trumpf_select and self.game.select_player.id == player_id):
                     data.append(1)
                 else:
                     data.append(0)
@@ -136,9 +135,10 @@ class Table:
                 for c in self.game.players[i].hand:
                     cards.append(c.id)
                 data.append(cards)
-                #vierte Zeile: which cards are in the stack
+                #vierte Zeile: which cards are in the stack (stack: 0: card_id, 1: player_id)
                 stack = []
-                stack = self.game.stack
+                for s in self.game.stack:
+                    stack.append((s[0].id, s[1]))
                 data.append(stack)
                 #fünfte Zeile: which color is the trumpf and which cord is called
                 info = (self.game.trumpf, self.game.lowest_bet)

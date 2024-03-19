@@ -32,6 +32,8 @@ class Game:
 
         self.last_stack = []
 
+        self.begin_numb_player = 0
+
         # Gamemodi
         self.player_search = True
         self.trumpf_select = False
@@ -57,6 +59,7 @@ class Game:
                 print(i)
                 self.round_get_one_card()
         #set the player active#
+        self.begin_numb_player = begin_numb_player
         self.current_player_nr = begin_numb_player
         self.players[self.current_player_nr].action = True
         for player in self.players:
@@ -87,6 +90,7 @@ class Game:
         if self.agree_number == 4:
             self.player_search = False
             self.trumpf_select = True
+            #set the player active who has the lowest bet
             print("next step in the game is possible")
 
         print(f"Now {self.agree_number} agreed for it, active is {self.players[self.current_player_nr].id}")
@@ -100,19 +104,22 @@ class Game:
             self.play_mode = True
             self.trumpf_select = False
 
-        self.caller_group.append(player)
-        player.set_roll(1)
-        for p in self.players:
-            if p == player:
-                continue
-            for i in range(len(p.hand)):
-                if p.hand[i].value == self.lowest_bet and p.hand[i].color == trumpf:
-                    self.caller_group.append(p)
-                    p.set_roll(1)
-                    break
-                elif i == len(p.hand)-1:
-                    self.defender_group.append(p)
-                    p.set_roll(2)
+            self.players[self.current_player_nr].action = False
+            self.players[self.begin_numb_player].action = True
+
+            self.caller_group.append(player)
+            player.set_roll(1)
+            for p in self.players:
+                if p == player:
+                    continue
+                for i in range(len(p.hand)):
+                    if p.hand[i].value == self.lowest_bet and p.hand[i].color == trumpf:
+                        self.caller_group.append(p)
+                        p.set_roll(1)
+                        break
+                    elif i == len(p.hand)-1:
+                        self.defender_group.append(p)
+                        p.set_roll(2)
 
         return player
 
