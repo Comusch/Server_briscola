@@ -47,12 +47,74 @@ function changeImage(buttonId, newImageSrc) {
     }
 }
 
+// Function to send data to the server
+ function sendDataToServer(data) {
+    // Construct the request options
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+    // Make the fetch request
+    fetch('/table/' + table_id + '/send_action', requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json(); // Parse response JSON
+        })
+        .then(data => {
+            console.log('Response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+//Buttons for the will you play screen
+function button_will_you_play_click(value){
+    console.log("Value:", value);
+    var data = {
+        "action": 1,
+        "bet": value
+    };
+    sendDataToServer(data);
+}
+
+
+function selectTrumpfColor(value){
+    console.log("Value:", value);
+    var data = {
+        "action": 2,
+        "color": value
+    }
+    sendDataToServer(data);
+}
+
+function playCard(value){
+    console.log("Value:", value);
+    var data = {
+        "action": 3,
+        "id_Hand": value
+    }
+    sendDataToServer(data);
+}
+
+
+
+
+
+
 jQuery(document).ready(function($) {
     // Sample JSON data (replace this with your actual data)
 
     var url = '/table/'+table_id+'/game_data'
 
     // Function to replace the player HTML content form the data received
+    // so the ui will be updated
     function updatePlayersUI(data) {
 
         if (data[0] == 0 && data[1] == 1){
@@ -101,13 +163,11 @@ jQuery(document).ready(function($) {
         for (var i = 0; i < 8; i++){
             if (handCardsinformation[i] != null){
                 var card = handCardsinformation[i];
-                console.log("Card:", card);
                 if (card <10){
                     card = "0"+card;
                 }
                 src_image = "/static/Bilddateien/Card"+card+".png";
                 changeImage("card"+i, src_image);
-                console.log("changeImage:","card"+i, src_image);
             }
             else
             {
@@ -123,13 +183,11 @@ jQuery(document).ready(function($) {
         for (var i = 0; i < 5; i++){
             if (playedCardsinformation[i] != null){
                 var card = playedCardsinformation[i][0];
-                console.log("Card:", card);
                 if (card <10){
                     card = "0"+card;
                 }
                 src_image = "/static/Bilddateien/Card"+card+".png";
                 changeImage("bord_card"+cardorder[i], src_image);
-                console.log("changeImage:","bord_card"+cardorder[i], src_image);
             }
             else
             {
@@ -140,6 +198,7 @@ jQuery(document).ready(function($) {
 
     }
 
+    //Function to fetch the data from the server to update the UI
      function fetchPlayerData() {
         $.ajax({
             url: url,
@@ -165,4 +224,5 @@ jQuery(document).ready(function($) {
     // Example: Call updatePlayerData function every 10 seconds
     setInterval(fetchPlayerData, 1000); // 10000 milliseconds = 1 seconds
 });
+
 

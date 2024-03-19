@@ -115,6 +115,21 @@ def game_data(table_id):
     return jsonify(data)
 
 #TODO: add function to bet, select trumpf and play card form the clinet side
+@views.route('/table/<int:table_id>/send_action', methods=['GET', 'POST'])
+@login_required
+def send_action(table_id):
+    if request.method == 'POST':
+        #action: 1= bet, 2= select trumpf, 3= play card
+        data = request.get_json()
+        print(data)
+        if data['action'] == 1:
+            tables[table_id].add_Bet(current_user.id, data['bet'])
+        elif data['action'] == 2:
+            tables[table_id].Select_Trumpf(current_user.id, data['color'])
+        elif data['action'] == 3:
+            tables[table_id].play_Card(current_user.id, data['hand_id'])
+
+    return jsonify("Data received!")
 
 
 

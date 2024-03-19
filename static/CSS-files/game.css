@@ -29,7 +29,6 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-    background: url('../static/UI-Game/bord_1.png') center/cover no-repeat;
     background-size: cover; /* Ensures the background image covers the entire element */
 }
 
@@ -131,7 +130,7 @@
 /* Buttons for the cards */
 
 .buttons {
-    display: block; /* Show the Buttons */
+ /* Show the Buttons */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -179,7 +178,7 @@ button {
 }
 
 .buttons_willyouplay {
-    display: block; /* Show the Buttons */
+/* Show the Buttons */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -211,7 +210,7 @@ button {
     color: #fff;
 }
 
-.buttons_willyouplay{
+.buttons_which_color{
  /* Show the Buttons */
     display: flex;
     flex-wrap: wrap;
@@ -221,7 +220,7 @@ button {
     margin-bottom: 5px;
 }
 
-.card_will_play > img {
+.card_which_color > img {
     width: 100px;
     flex-shrink: 0; /* Prevents cards from shrinking */
 }
