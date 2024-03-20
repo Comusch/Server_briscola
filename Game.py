@@ -187,9 +187,9 @@ class Game:
 
         return self.who_wins()
 
-
     def who_wins(self):
         winners = []
+        winner_score = 0
         caller_score = 0
         defender_score = 0
         for player in self.caller_group:
@@ -198,9 +198,12 @@ class Game:
             defender_score += player.score
         if caller_score > defender_score:
             winners = self.caller_group
+            winner_score = caller_score
         else:
             winners = self.defender_group
-        return winners
+            winner_score = defender_score
+
+        return (winners, winner_score)
 
     def getScore(self, player):
         for card in player.collection:

@@ -34,7 +34,6 @@ jQuery(document).ready(function($) {
             url: '/table/'+table_id+'/player_data',
             type: 'GET',
             success: function(response) {
-                //TODO: Fix the response data
                 var tableLength = response[0][0];
                 if (tableLength == response[0][1] && response[0][1] != 0){
                     window.location.href = '/table/'+table_id+'/game';

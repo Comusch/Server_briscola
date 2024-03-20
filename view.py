@@ -98,23 +98,34 @@ def player_data(table_id):
 def game(table_id):
     return render_template("game.html", user=current_user, table=tables[table_id], players=tables[table_id].getArrayOfPlayerWithp_id(current_user.id))
 
+
+#TODO: Problems to fix: when the button is clicked, the game should be updated emidiatly (Java Script)
+#TODO: The sorting of the playernames are incorrect and the card on the table should match together (Java Script)
+#TODO: the fithst card is not shown, because of the instant update (Python)
+#TODO: the lable in which stack they are and who wants to play is not shown (Java Script)
 @views.route('/table/<int:table_id>/game_data', methods=['GET', 'POST'])
 @login_required
 def game_data(table_id):
     data =[]
     if len(tables) > table_id:
+
+        if tables[table_id].game.player_search and tables[table_id].game.players[tables[table_id].game.current_player_nr].id != current_user.id:
+            i = tables[table_id].game.current_player_nr
+            #the play botes skip the bet
+            tables[table_id].game.players[i] = tables[table_id].game.add_Bet(tables[table_id].game.players[i], 20)
+        elif tables[table_id].game.play_mode and tables[table_id].game.players[tables[table_id].game.current_player_nr].id != current_user.id:
+            i = tables[table_id].game.players[tables[table_id].game.current_player_nr].id
+            #the bots always play the first card
+            tables[table_id].play_Card(i, 0)
+
         data = tables[table_id].get_game_state(current_user.id)
-
-        #test if the card will shown on the bord
-        d2 = [(22, 1), (23, 2), (24, 3)]
-        data[3] = d2
-
         print(data)
+
     else:
         data = None
     return jsonify(data)
 
-#TODO: add function to bet, select trumpf and play card form the clinet side
+#then the webside is finished with a five player mode
 @views.route('/table/<int:table_id>/send_action', methods=['GET', 'POST'])
 @login_required
 def send_action(table_id):
@@ -127,7 +138,7 @@ def send_action(table_id):
         elif data['action'] == 2:
             tables[table_id].Select_Trumpf(current_user.id, data['color'])
         elif data['action'] == 3:
-            tables[table_id].play_Card(current_user.id, data['hand_id'])
+            tables[table_id].play_Card(current_user.id, data['id_Hand'])
 
     return jsonify("Data received!")
 

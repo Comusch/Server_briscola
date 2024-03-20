@@ -81,13 +81,14 @@ class Table:
         for i in range(len(self.game.players)):
             if self.game.players[i].id == player_id:
                 self.game.players[i] = self.game.play_Card(hand_nr, self.game.players[i])
+                print("The stack has the length: ", len(self.game.stack))
                 if len(self.game.stack) == 5:
                     self.game.end_of_round()
                 self.Is_Game_Over()
                 break
 
     def Is_Game_Over(self):
-        if self.game.players[self.game.current_player_nr].hand == []:
+        if len(self.game.players[self.game.current_player_nr].hand):
             self.end_of_game_screen = True
             return True
         else:
@@ -97,12 +98,13 @@ class Table:
     def Have_you_won(self, player_id):
         for i in range(len(self.game.players)):
             if self.game.players[i].id  == player_id:
-                winner = self.game.End_of_Game()
+                winner, winner_score = self.game.End_of_Game()
                 for w in winner:
                     if w.id == player_id:
-                        return True
+                        return (True, winner_score)
                     else:
-                        return False
+                        loser_score = 120 - winner_score
+                        return (False, loser_score)
                     break
 
     #give the game state back
@@ -116,13 +118,12 @@ class Table:
                     data.append(0)
                 elif self.game.trumpf_select:
                     data.append(1)
-                elif self.end_of_game_screen:
+                elif self.game.end_of_game_screen:
                     data.append(3)
                     #erweiterete Zeile 2: have you won: 0 = false, 1 = true
-                    if self.Have_you_won(player_id):
-                        data.append(1)
-                    else:
-                        data.append(0)
+                    won, score = self.Have_you_won(player_id)
+                    win_new = [won, score]
+                    data.append(win_new)
                 else:
                     data.append(2)
                 #zweite Zeile: is player action: 0 = false, 1 = true
@@ -146,7 +147,10 @@ class Table:
                 #sechste Zeile: number of stacks
                 data.append(self.game.number_of_stacks)
                 #siebte Zeile: last stack
-                data.append(self.game.last_stack)
+                last_stack = []
+                for s in self.game.last_stack:
+                    last_stack.append((s[0].id, s[1]))
+                data.append(last_stack)
 
         return data
 

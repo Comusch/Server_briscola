@@ -104,10 +104,6 @@ function playCard(value){
 }
 
 
-
-
-
-
 jQuery(document).ready(function($) {
     // Sample JSON data (replace this with your actual data)
 
