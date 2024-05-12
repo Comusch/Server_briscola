@@ -30,6 +30,28 @@ function changeColor_visibility(show){
     }
 }
 
+function changetheBorder_of_activePlayer(data_active_player_id){
+    var number_active = -1;
+    for(var i = 0; i < player_field.length; i++) {
+        if(data_active_player_id == player_field[i]) {
+            number_active = i;
+        }
+    }
+    console.log(number_active)
+    for(var i = 0; i<5; i++) {
+        if(i==3){
+            continue;
+        }
+        var playerElement = document.getElementById('player'+i);
+        if(i == number_active){
+            playerElement.style.border = '4px solid green';
+        }
+        else{
+            playerElement.style.border = 'none';
+        }
+    }
+}
+
 // Function to change the image source of a button
 function changeImage(buttonId, newImageSrc) {
     var button = document.getElementById(buttonId);
@@ -153,6 +175,9 @@ jQuery(document).ready(function($) {
             changeColor_visibility(false);
             // end of the game
         }
+
+        //show, which player is active and which not (with a green circle at the profil pictures)
+        changetheBorder_of_activePlayer(data[7])
 
         //show the hand cards
         var handCardsinformation = data[2];

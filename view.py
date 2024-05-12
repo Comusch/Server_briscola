@@ -96,13 +96,18 @@ def player_data(table_id):
 @views.route('/table/<int:table_id>/game', methods=['GET', 'POST'])
 @login_required
 def game(table_id):
-    return render_template("game.html", user=current_user, table=tables[table_id], players=tables[table_id].getArrayOfPlayerWithp_id(current_user.id))
+    players = tables[table_id].getArrayOfPlayerWithp_id(current_user.id)
+    print(players)
+    return render_template("game.html", user=current_user, table=tables[table_id], players=players)
 
 
-#TODO: Problems to fix: when the button is clicked, the game should be updated emidiatly (Java Script)
-#TODO: The sorting of the playernames are incorrect and the card on the table should match together (Java Script)
+#TODO: Problems to fix: when the button is clicked, the game should be updated emmidiatly (Java Script)
+#Done: The sorting of the playernames are incorrect and the card on the table should match together (Java Script)
+#Done: A green ring should be shown around the player who is active (Java Script)
+#TODO: At the beginning of the game, the player should be able to bet (Java Script)
 #TODO: the fithst card is not shown, because of the instant update (Python)
 #TODO: the lable in which stack they are and who wants to play is not shown (Java Script)
+#TODO: the game is not finished, because the end of the game is not shown (Python and Java Script)
 @views.route('/table/<int:table_id>/game_data', methods=['GET', 'POST'])
 @login_required
 def game_data(table_id):

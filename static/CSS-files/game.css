@@ -110,9 +110,9 @@
     border: 3px solid transparent;
 }
 
-.player img:hover {
-    border-color: #00ff00; /* Green */
-}
+/*.player img:hover {
+    border-color: #00ff00; /* Green
+}*/
 
 .call_player {
     font-size: 12px;

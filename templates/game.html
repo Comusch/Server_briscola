@@ -4,6 +4,7 @@
     <link link rel="stylesheet" href="{{ url_for("static", filename="CSS-files/game.css")}}"/>
     <script>
           var table_id = {{ table.id }};
+          var player_field = [{{players[0].id }}, {{ players[1].id }}, {{players[2].id }}, {{ players[3].id }}, {{ players[4].id }}];
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -30,18 +31,18 @@
             <div class="game-field">
                 <div class="firstAndSecoundPlayer">
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/"+players[0].img_profile)}}" alt="Player 1">
+                        <img id="player0" src="{{ url_for('static', filename="Profil_images/"+players[0].img_profile)}}" alt="Player 1">
                         <p class="call_player" id="call_player_0">
                             I would play with a 12.
                         </p>
                         <span>{{ players[0].nickName }}</span>
                     </div>
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/"+players[1].img_profile)}}" alt="Player 2">
+                        <img  id ="player4" src="{{ url_for('static', filename="Profil_images/"+players[4].img_profile)}}" alt="Player 2">
                         <p class="call_player" id="call_player_1">
                             I would play with a 12.
                         </p>
-                        <span>{{ players[1].nickName }}</span>
+                        <span>{{ players[4].nickName }}</span>
                     </div>
                 </div>
                 <div class="game-area">
@@ -66,18 +67,18 @@
                 </div>
                 <div class="therdAndFourthPlayer">
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/"+players[3].img_profile)}}" alt="Player 3">
+                        <img  id="player1" src="{{ url_for('static', filename="Profil_images/"+players[1].img_profile)}}" alt="Player 3">
                         <p class="call_player" id="call_player_3">
                             I would play with a 12.
                         </p>
-                        <span>{{ players[3].nickName }}</span>
+                        <span>{{ players[1].nickName }}</span>
                     </div>
                     <div class="player">
-                        <img src="{{ url_for('static', filename="Profil_images/"+players[4].img_profile)}}" alt="Player 4">
+                        <img id="player2" src="{{ url_for('static', filename="Profil_images/"+players[2].img_profile)}}" alt="Player 4">
                         <p class="call_player" id="call_player_4">
                             I would play with a 12.
                         </p>
-                        <span>{{ players[4].nickName }}</span>
+                        <span>{{ players[2].nickName }}</span>
                     </div>
                 </div>
             </div>

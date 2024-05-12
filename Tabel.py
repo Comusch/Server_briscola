@@ -29,18 +29,21 @@ class Table:
         players_inorder = []
         players_inorder = self.players
         nr = getplayer_number_array(self.players, p_id)
-        count_of_elements = (nr-(len(self.players)-1-nr))/2
-        if count_of_elements < 0:
-            for i in range(int(count_of_elements)):
-                a=players_inorder[len(players_inorder)-1]
-                players_inorder.remove(players_inorder[len(players_inorder)-1])
-                players_inorder.insert(0, a)
-        else:
-            for i in range(int(count_of_elements)):
-                a=players_inorder[0]
-                players_inorder.remove(players_inorder[0])
+        steps = nr-3
+        print(steps)
+        if steps > 0:
+            for i in range(steps):
+                a = players_inorder[0]
+                players_inorder.remove(a)
                 players_inorder.append(a)
-
+        else:
+            steps *=-1
+            for i in range(steps):
+                a = players_inorder[4]
+                players_inorder.remove(a)
+                players_inorder.insert(0, a)
+                print(f"new sort:{players_inorder}")
+        print("Sorting is done")
         return players_inorder
 
     def add_player(self, player):
@@ -151,6 +154,8 @@ class Table:
                 for s in self.game.last_stack:
                     last_stack.append((s[0].id, s[1]))
                 data.append(last_stack)
+                #achte Zeile, which player are active
+                data.append(self.game.players[self.game.current_player_nr].id)
 
         return data
 
