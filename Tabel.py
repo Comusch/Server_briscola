@@ -144,7 +144,7 @@ class Table:
                 for s in self.game.stack:
                     stack.append((s[0].id, s[1]))
                 data.append(stack)
-                #fünfte Zeile: which color is the trumpf and which cord is called
+                #fünfte Zeile: which color is the trumpf and which card is called
                 info = (self.game.trumpf, self.game.lowest_bet)
                 data.append(info)
                 #sechste Zeile: number of stacks
@@ -156,6 +156,12 @@ class Table:
                 data.append(last_stack)
                 #achte Zeile, which player are active
                 data.append(self.game.players[self.game.current_player_nr].id)
+                #neunte Zeile, which card is bet
+                if self.game.select_player == None:
+                    data.append((self.game.lowest_bet, -1))
+                else:
+                    data.append((self.game.lowest_bet, self.game.select_player.id))
+
 
         return data
 

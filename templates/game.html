@@ -4,7 +4,7 @@
     <link link rel="stylesheet" href="{{ url_for("static", filename="CSS-files/game.css")}}"/>
     <script>
           var table_id = {{ table.id }};
-          var player_field = [{{players[0].id }}, {{ players[1].id }}, {{players[2].id }}, {{ players[3].id }}, {{ players[4].id }}];
+          var player_field = [({{players[0].id }}, "{{ players[0].nickName }}"), ({{ players[1].id }}, "{{ players[1].nickName }}"), ({{players[2].id }}, "{{ players[2].nickName }}"), ({{ players[3].id }}, "{{ players[3].nickName }}"), ({{ players[4].id }}, "{{ players[4].nickName }}")];
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -39,7 +39,7 @@
                     </div>
                     <div class="player">
                         <img  id ="player4" src="{{ url_for('static', filename="Profil_images/"+players[4].img_profile)}}" alt="Player 2">
-                        <p class="call_player" id="call_player_1">
+                        <p class="call_player" id="call_player_4">
                             I would play with a 12.
                         </p>
                         <span>{{ players[4].nickName }}</span>
@@ -68,14 +68,14 @@
                 <div class="therdAndFourthPlayer">
                     <div class="player">
                         <img  id="player1" src="{{ url_for('static', filename="Profil_images/"+players[1].img_profile)}}" alt="Player 3">
-                        <p class="call_player" id="call_player_3">
+                        <p class="call_player" id="call_player_1">
                             I would play with a 12.
                         </p>
                         <span>{{ players[1].nickName }}</span>
                     </div>
                     <div class="player">
                         <img id="player2" src="{{ url_for('static', filename="Profil_images/"+players[2].img_profile)}}" alt="Player 4">
-                        <p class="call_player" id="call_player_4">
+                        <p class="call_player" id="call_player_2">
                             I would play with a 12.
                         </p>
                         <span>{{ players[2].nickName }}</span>

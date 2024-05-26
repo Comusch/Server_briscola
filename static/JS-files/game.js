@@ -1,3 +1,5 @@
+current_bet = 99
+
 //front-End game Controller
 //Toggle the Will you play screen
 function toggleWillYouPlay(show) {
@@ -30,14 +32,20 @@ function changeColor_visibility(show){
     }
 }
 
-function changetheBorder_of_activePlayer(data_active_player_id){
-    var number_active = -1;
+//with this function you can get the number of the player(p_id : id form the server) for the player on the bord
+//get number between 0 and 4 without 3
+function get_id_form_p_id(p_id){
     for(var i = 0; i < player_field.length; i++) {
-        if(data_active_player_id == player_field[i]) {
-            number_active = i;
+        if(p_id == player_field[i][0]) {
+            return i
         }
     }
-    console.log(number_active)
+}
+
+
+function changetheBorder_of_activePlayer(data_active_player_id){
+    var number_active = -1;
+    number_active = get_id_form_p_id(data_active_player_id)
     for(var i = 0; i<5; i++) {
         if(i==3){
             continue;
@@ -125,7 +133,31 @@ function playCard(value){
     sendDataToServer(data);
 }
 
+function get_Name_of_player(p_id) {
+    for(const player of player_field){
+        if (player[0] == p_id){
+            return player[1]
+        }
+    }
+}
 
+function change_Speech_field(p_id, text){
+    var b_p_id = get_id_form_p_id(p_id)
+    var playerElement = document.getElementById('call_player_'+b_p_id);
+    if (text == ""){
+        playerElement.textContent = "";
+    }
+    else{
+        playerElement.textContent = text;
+    }
+}
+
+function change_game_state_lable(text){
+    var lableElemnt = document.getElementById('StichLable')
+    lableElemnt.textContent = text;
+}
+
+//main function to update the website
 jQuery(document).ready(function($) {
     // Sample JSON data (replace this with your actual data)
 
@@ -145,7 +177,10 @@ jQuery(document).ready(function($) {
             toggleWhoWins(false);
             changeColor_visibility(false);
 
-            //TODO: change the text of the lable, in which play phase we are
+            var bet_p_id = data[9][1]
+            var lowest_bet = data[9][0]
+            change_game_state_lable("Betting:...")
+            //TODO: get a card name of the card value lowest bet and show it with the name of the player, who bet on this card value, on the lable of the bord
         }
         else if (data[0] == 1 && data[1] == 1){
             toggleWillYouPlay(false);

@@ -26,7 +26,7 @@ class Game:
         self.current_player_nr = 0
         # varibles for the bet, which player plays
         self.select_player = None
-        self.lowest_bet = 999
+        self.lowest_bet = 99
         self.agree_number = 0
         self.number_of_stacks = 0
 
